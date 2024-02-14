@@ -16,6 +16,7 @@ GPT_BACKEND=
 * run commands from folder with project
 * docker build -t MlNavigator/simple_gpt_bot .
 * docker run -d --restart=always --name=simple_gpt_bot --env-file ./cred/.env MlNavigator/simple_gpt_bot
+* after changing ./cred/.env file - stop and remove container and run it again
 
 # using bot
 
