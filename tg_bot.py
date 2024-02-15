@@ -241,6 +241,9 @@ async def command_reset_client_handler(message: Message) -> None:
     user_data[add_user_id]['user_id'] = add_user_id
     print(users)
 
+    async with as_lock:
+        update_user_data()
+
     msg = f'добавлен юзер с id {add_user_id}'
     await message.answer(msg)
 
