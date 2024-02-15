@@ -5,10 +5,10 @@ add config.json file to assets folder
 need config data see in example_config.json
 ```
 {
-  "BOT_TOKEN": "data",
-  "ACCESS_KEY": "data",
+  "BOT_TOKEN": "телеграм бот токен, спросите его у botfather",
+  "ACCESS_KEY": "пароль обынчых пользователей",
   "SU_ACCESS_KEY": "admin_password",
-  "OPENAI_API_KEY": "data",
+  "OPENAI_API_KEY": "ключ опен аи или их прокси",
   "GPT_BACKEND": "https://api.proxyapi.ru/openai/v1 - or other api url"
 }
 ```
@@ -32,7 +32,7 @@ need config data see in example_config.json
 
 # admin area
 
-* /admin super_user_pass
+* /admin super_user_pass - для входа в админ режим
 * /config key value - изменит данные в конфиге бота.
 * /reboot - перезапустить бота, будет перезапуск контейнера с новыми конфигами
 * /reset_client - обновить подключение к чат гпт - надо делать после изменения токена и урла чата гпт
