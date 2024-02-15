@@ -1,0 +1,7 @@
+{
+  "BOT_TOKEN": "data",
+  "ACCESS_KEY": "data",
+  "SU_ACCESS_KEY": "admin_password",
+  "OPENAI_API_KEY": "data",
+  "GPT_BACKEND": "https://api.proxyapi.ru/openai/v1 - or other api url"
+}

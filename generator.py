@@ -1,10 +1,22 @@
 import os
 from openai import OpenAI
+import config
 
-client = OpenAI(
-    api_key=os.environ.get("OPENAI_API_KEY"),
-    base_url=os.environ.get("GPT_BACKEND"),
-)
+
+def get_client():
+    client = OpenAI(
+        api_key=config.config["OPENAI_API_KEY"],
+        base_url=config.config["GPT_BACKEND"],
+    )
+    return client
+
+
+client = get_client()
+
+
+def update_client():
+    global client
+    client = get_client()
 
 
 def generate(user_data):

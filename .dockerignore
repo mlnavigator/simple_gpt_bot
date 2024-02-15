@@ -1,5 +1,5 @@
 venv
-cred/*.py
-cred/.env
+assets/config.json
+assets/user_data.json
 __pycache__
 .idea/
