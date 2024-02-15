@@ -101,7 +101,10 @@ async def command_start_handler(message: Message) -> None:
                              )
         print(user_data)
     else:
-        await message.answer("для доступа к боту введите /start ACCESS_KEY")
+        await message.answer(
+            f"Ваш user_id {user_id}"
+            "для доступа к боту введите /start ACCESS_KEY"
+                             )
 
 
 @dp.message(Command(commands=["admin"]))
@@ -126,6 +129,7 @@ async def command_admin_handler(message: Message) -> None:
                              "/reset_client - обновить подключение к чат гпт\n\n"
                              "/stat - статистика по пользователям\n\n"
                              "/rm user_id - удалить пользователя\n\n"
+                             "/add user_id - добавить пользователя\n\n"
                              )
     else:
         await message.answer("для доступа к админке введите /admin ACCESS_KEY")
@@ -215,6 +219,27 @@ async def command_reset_client_handler(message: Message) -> None:
 
     msg = f'удален юзер с id {del_user_id}'
 
+    await message.answer(msg)
+
+
+@dp.message(Command(commands=["add"]))
+async def command_reset_client_handler(message: Message) -> None:
+    user_id = str(message.chat.id)
+    if user_id not in superusers:
+        await message.answer("нет доступа")
+        return
+
+    text = message.text
+    parts = text.split()
+
+    if len(parts) != 2:
+        msg = 'не верный формат'
+        await message.answer(msg)
+        return
+
+    add_user_id = str(parts[1])
+    users.add(add_user_id)
+    msg = f'добавлен юзер с id {add_user_id}'
     await message.answer(msg)
 
 
