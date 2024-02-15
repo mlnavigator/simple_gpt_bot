@@ -1,22 +1,25 @@
-# env data
+# config data
 
-add .env file to cred folder
+add config.json file to assets folder
 
-.env file data
+need config data see in example_config.json
 ```
-BOT_TOKEN=
-ACCESS_KEY=
-OPENAI_API_KEY=
-GPT_BACKEND=
+{
+  "BOT_TOKEN": "data",
+  "ACCESS_KEY": "data",
+  "SU_ACCESS_KEY": "admin_password",
+  "OPENAI_API_KEY": "data",
+  "GPT_BACKEND": "https://api.proxyapi.ru/openai/v1 - or other api url"
+}
 ```
 
 
 # run project
 
 * run commands from folder with project
-* docker build -t MlNavigator/simple_gpt_bot .
-* docker run -d --restart=always --name=simple_gpt_bot --env-file ./cred/.env MlNavigator/simple_gpt_bot
-* after changing ./cred/.env file - stop and remove container and run it again
+* docker build -t simple_gpt_bot .
+* docker run -d --restart=always --name=simple_gpt_bot -v./assets:/app/assets simple_gpt_bot
+* after changing ./assets/config.json - stop and remove container and run it again
 
 # using bot
 
@@ -25,3 +28,13 @@ GPT_BACKEND=
 * Для установки системного сообщения напишите /system ваше сообщение
 * /info - для получения вашей информации
 * /reset - очистить историю сообщений
+* бот использует гпт 3.5 турбо, тк она дешевле
+
+# admin area
+
+* /admin super_user_pass
+* /config key value - изменит данные в конфиге бота.
+* /reboot - перезапустить бота, будет перезапуск контейнера с новыми конфигами
+* /reset_client - обновить подключение к чат гпт - надо делать после изменения токена и урла чата гпт
+* /stat - статистика по пользователям
+* /rm user_id - удалить пользователя по его телеграм id
