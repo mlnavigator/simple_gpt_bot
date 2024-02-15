@@ -102,7 +102,7 @@ async def command_start_handler(message: Message) -> None:
         print(user_data)
     else:
         await message.answer(
-            f"Ваш user_id {user_id}"
+            f"Ваш user_id\n{user_id}\n\n"
             "для доступа к боту введите /start ACCESS_KEY"
                              )
 
@@ -114,7 +114,6 @@ async def command_admin_handler(message: Message) -> None:
     """
     user_id = str(message.chat.id)
     text = message.text.split('/admin')[-1].strip()
-    # print('ololo', user_id, text)
 
     if user_id in superusers or text == SU_ACCESS_KEY:
         superusers.add(user_id)
@@ -239,6 +238,9 @@ async def command_reset_client_handler(message: Message) -> None:
 
     add_user_id = str(parts[1])
     users.add(add_user_id)
+    user_data[add_user_id]['user_id'] = add_user_id
+    print(users)
+
     msg = f'добавлен юзер с id {add_user_id}'
     await message.answer(msg)
 
@@ -265,7 +267,7 @@ async def command_info_handler(message: Message) -> None:
         await message.answer("для доступа к боту введите /start ACCESS_KEY")
         return
 
-    data = f'Ваш телеграм чат ID: {user_id}\n\n'
+    data = f'Ваш телеграм чат ID:\n{user_id}\n\n'
     data += f'system_message: {user_data[user_id]["system"]}\n\n'
     data += 'История диалога:\n\n'
     for m in user_data[user_id]['messages']:
