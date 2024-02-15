@@ -16,11 +16,16 @@ need config data see in example_config.json
 
 # run project
 
-* run commands from main folder with project
-* docker build -t simple_gpt_bot .
-* docker run -d --restart=always --name=simple_gpt_bot -v ./assets:/app/assets simple_gpt_bot
-* run previous command from main folder of project, or set absolute path to assets folder with config
-* after changing ./assets/config.json - stop and remove container and run it again
+* variant 1. run with docker: 
+  * cd "project folder"; sudo bash ./rebuild.sh
+  * for remove container and image: sudo bash ./remove.sh
+
+
+* variant 2. run with python 3.10. 
+  * cd "project folder"
+  * install and activate venv
+  * python3 -m pip install -r requirements.txt; python3 tg_bot.py &
+
 
 # using bot
 

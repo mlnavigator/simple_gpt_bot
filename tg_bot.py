@@ -165,7 +165,8 @@ async def command_config_handler(message: Message) -> None:
     key = parts[1]
     value = parts[2]
 
-    config.update_config_attribute(key, value)
+    async with as_lock:
+        config.update_config_attribute(key, value)
 
     msg = f'установлены значения "{key}": "{value}"'
 
