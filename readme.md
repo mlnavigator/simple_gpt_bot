@@ -16,9 +16,10 @@ need config data see in example_config.json
 
 # run project
 
-* run commands from folder with project
+* run commands from main folder with project
 * docker build -t simple_gpt_bot .
-* docker run -d --restart=always --name=simple_gpt_bot -v./assets:/app/assets simple_gpt_bot
+* docker run -d --restart=always --name=simple_gpt_bot -v ./assets:/app/assets simple_gpt_bot
+* run previous command from main folder of project, or set absolute path to assets folder with config
 * after changing ./assets/config.json - stop and remove container and run it again
 
 # using bot

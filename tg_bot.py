@@ -120,6 +120,7 @@ async def command_admin_handler(message: Message) -> None:
         user_data[user_id]['first_name'] = message.chat.first_name
         # print(user_data[user_id])
         await message.answer("Админский доступ получен.\n\n"
+                             "/admin список админ команд\n\n"
                              "/config key value\n\n"
                              "/reboot - перезапустить бота\n\n"
                              "/reset_client - обновить подключение к чат гпт\n\n"
