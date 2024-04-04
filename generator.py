@@ -46,7 +46,7 @@ def generate(user_data):
 
     chat_completion = client.chat.completions.create(
         messages=messages_list,
-        model="gpt-3.5-turbo",
+        model=config.config["GPT_MODEL"],
     )
 
     return chat_completion.choices[0].message.content
@@ -60,7 +60,7 @@ def test():
                 "content": "Say this is a test",
             }
         ],
-        model="gpt-3.5-turbo",
+        model=config.config["GPT_MODEL"],
     )
 
     print(chat_completion.choices[0].message.content)

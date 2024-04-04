@@ -9,7 +9,8 @@ need config data see in example_config.json
   "ACCESS_KEY": "пароль обынчых пользователей",
   "SU_ACCESS_KEY": "admin_password",
   "OPENAI_API_KEY": "ключ опен аи или их прокси",
-  "GPT_BACKEND": "https://api.proxyapi.ru/openai/v1 - or other api url"
+  "GPT_BACKEND": "https://api.proxyapi.ru/openai/v1 - or other api url",
+  "GPT_MODEL": "gpt-3.5-turbo"
 }
 ```
 
@@ -35,7 +36,7 @@ need config data see in example_config.json
 * Для установки системного сообщения напишите /system ваше сообщение
 * /info - для получения вашей информации
 * /reset - очистить историю сообщений
-* бот использует гпт 3.5 турбо, тк она дешевле
+* бот использует гпт 3.5 турбо, тк она дешевле, но вы можете поменять это в конфиге
 
 # admin area
 
