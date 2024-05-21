@@ -17,6 +17,7 @@ import config
 from generator import generate, update_client
 
 as_lock = asyncio.Lock()
+bot = None
 
 
 # Bot token can be obtained via https://t.me/BotFather
@@ -62,6 +63,12 @@ if os.path.exists(user_data_path):
 
 # All handlers should be attached to the Router (or Dispatcher)
 dp = Dispatcher()
+
+
+def _escape(text: str) -> str:
+    text = str(text).replace('<', '&lt;').\
+        replace('>', '&gt;').replace('&', '&amp;')
+    return text
 
 
 def create_keyboard():
@@ -291,6 +298,30 @@ async def command_reset_handler(message: Message) -> None:
     await message.answer('история сообщений очищена')
 
 
+@dp.message(Command(commands=["mass"]))
+async def command_mass_handler(message: Message) -> None:
+    global bot
+
+    user_id = str(message.chat.id)
+    if user_id not in superusers:
+        await message.answer("нет доступа")
+        return
+
+    text = message.text
+    parts = text.split()
+
+    if len(parts) < 2:
+        msg = 'не верный формат'
+        await message.answer(msg)
+        return
+
+    mass_message = _escape(' '.join(parts[1:]))
+    all_users = list(users)
+
+    for user_id in all_users:
+        await bot.send_message(user_id, mass_message)
+
+
 @dp.message()
 async def message_handler(message: types.Message) -> None:
     user_id = str(message.chat.id)
@@ -305,6 +336,7 @@ async def message_handler(message: types.Message) -> None:
         update_user_data()
     try:
         generated = generate(user_data[user_id])
+        generated = _escape(generated)
 
         user_data[user_id]['messages'].append(('ai', generated))
         user_data[user_id]['messages'] = user_data[user_id]['messages'][-10:]
@@ -326,6 +358,7 @@ async def message_handler(message: types.Message) -> None:
 
 async def main() -> None:
     # Initialize Bot instance with a default parse mode which will be passed to all API calls
+    global bot
     bot = Bot(TOKEN, parse_mode=ParseMode.HTML)
     # And the run events dispatching
     await dp.start_polling(bot)

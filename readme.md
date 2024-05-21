@@ -47,3 +47,4 @@ need config data see in example_config.json
 * /stat - статистика по пользователям
 * /rm user_id - удалить пользователя по его телеграм id
 * /add user_id - добавить пользователя по его телеграм id
+* /mass message text - отправить массовое сообщение всем пользователям бота
