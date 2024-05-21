@@ -136,6 +136,7 @@ async def command_admin_handler(message: Message) -> None:
                              "/stat - статистика по пользователям\n\n"
                              "/rm user_id - удалить пользователя\n\n"
                              "/add user_id - добавить пользователя\n\n"
+                             "/mass message text - отправить массовое сообщение всем пользователям бота\n\n"
                              )
     else:
         await message.answer("для доступа к админке введите /admin ACCESS_KEY")
