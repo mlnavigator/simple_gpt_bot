@@ -26,8 +26,8 @@ ACCESS_KEY = config.config["ACCESS_KEY"]
 SU_ACCESS_KEY = config.config["SU_ACCESS_KEY"]
 
 
-users = set()
-superusers = set()
+users = set()  # user_id as str
+superusers = set()  # user_id as str
 
 user_data = defaultdict(lambda: {'messages': [], 'system': '',
                                        'user_name': '', 'first_name': '',
@@ -137,6 +137,7 @@ async def command_admin_handler(message: Message) -> None:
                              "/rm user_id - удалить пользователя\n\n"
                              "/add user_id - добавить пользователя\n\n"
                              "/mass message text - отправить массовое сообщение всем пользователям бота\n\n"
+                             "/msg_personal user_id message - отправить сообщение конкретному пользователю бота\n\n"
                              )
     else:
         await message.answer("для доступа к админке введите /admin ACCESS_KEY")
@@ -321,6 +322,34 @@ async def command_mass_handler(message: Message) -> None:
 
     for user_id in all_users:
         await bot.send_message(user_id, mass_message)
+
+
+@dp.message(Command(commands=["msg_personal"]))
+async def command_msg_personal_handler(message: Message) -> None:
+    global bot
+
+    user_id = str(message.chat.id)
+    if user_id not in superusers:
+        await message.answer("нет доступа")
+        return
+
+    text = message.text
+    parts = text.split()
+
+    if len(parts) < 3:
+        msg = 'не верный формат'
+        await message.answer(msg)
+        return
+    try:
+        trg_user_id = str(int(parts[1]))
+    except:
+        msg = 'не верный формат user_id'
+        await message.answer(msg)
+        return
+
+    msg = _escape(' '.join(parts[2:]))
+    if trg_user_id in users:
+        await bot.send_message(trg_user_id, msg)
 
 
 @dp.message()

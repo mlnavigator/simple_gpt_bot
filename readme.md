@@ -48,3 +48,4 @@ need config data see in example_config.json
 * /rm user_id - удалить пользователя по его телеграм id
 * /add user_id - добавить пользователя по его телеграм id
 * /mass message text - отправить массовое сообщение всем пользователям бота
+* /msg_personal user_id message - отправить сообщение конкретному пользователю бота
