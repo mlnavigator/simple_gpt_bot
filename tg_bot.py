@@ -325,6 +325,8 @@ async def command_mass_handler(message: Message) -> None:
             for x in range(0, len(mass_message), 4096):
                 text_ = mass_message[x:x + 4096]
                 await bot.send_message(user_id, text_)
+        else:
+            await bot.send_message(user_id, mass_message)
 
 
 @dp.message(Command(commands=["msg_personal"]))
@@ -356,6 +358,8 @@ async def command_msg_personal_handler(message: Message) -> None:
             for x in range(0, len(msg), 4096):
                 text_ = msg[x:x + 4096]
                 await bot.send_message(trg_user_id, text_)
+        else:
+            await bot.send_message(trg_user_id, msg)
 
 
 @dp.message()
@@ -387,6 +391,8 @@ async def message_handler(message: types.Message) -> None:
             for x in range(0, len(generated), 4096):
                 text_ = generated[x:x + 4096]
                 await message.answer(text_, reply_markup=keyboard)
+        else:
+            await message.answer(generated, reply_markup=keyboard)
 
         async with as_lock:
             update_user_data()
